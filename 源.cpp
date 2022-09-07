@@ -20,6 +20,8 @@ int main()
 	//打印整数-%d-%zd
 	//double-%lf
 	//float-%f
+	//字符串-%s
+	//字符-%c
 	printf("%d\n", 100);
 	//sizeof-关键字-操作符-计算类型或许变量所占空间大小-单位-字节byte
 	//计算机单位

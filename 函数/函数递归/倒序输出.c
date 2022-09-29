@@ -52,5 +52,4 @@ void main()
 	B(arr);
 	C(arr);
 	printf("%s\n", arr);
-
 }

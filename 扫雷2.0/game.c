@@ -52,6 +52,9 @@ void Finmine(char board[ROW][COL], char mine[ROW][COL],int row,int col, int x, i
 				if (x2 == x)
 				{
 				}
+				else if (mine[x2][y] >= '9')
+				{
+				}
 				else
 				{
 					if (mine[x2][y] > '0')
@@ -59,13 +62,23 @@ void Finmine(char board[ROW][COL], char mine[ROW][COL],int row,int col, int x, i
 						if (board[x2][y] != ' ')
 						{
 							board[x2][y] = mine[x2][y];
-							if (mine[x2][y - 1] > '0' && board[x2][y - 1] == '*')
+							if (mine[x2][y - 1] > '0' && board[x2][y - 1] == '*'&& mine[x2][y - 1] <'9')
 							{
 								board[x2][y - 1] = mine[x2][y - 1];
 							}
-							if (mine[x2][y + 1] > '0' && board[x2][y + 1] == '*')
+							else if (mine[x2][y - 1] == '0' && board[x2][y - 1] == '*' && mine[x2][y - 1] < '9')
+							{
+								board[x2][y-1] = ' ';
+								Finmine(board, mine, row, col, x2, y-1);
+							}
+							if (mine[x2][y + 1] > '0' && board[x2][y + 1] == '*' && mine[x2][y + 1] < '9')
 							{
 								board[x2][y + 1] = mine[x2][y + 1];
+							}
+							else if(mine[x2][y + 1]=='0' && board[x2][y + 1]=='*' && mine[x2][y + 1] < '9')
+							{
+								board[x2][y+1] = ' ';
+								Finmine(board, mine, row, col, x2, y + 1);
 							}
 						}
 
@@ -86,6 +99,9 @@ void Finmine(char board[ROW][COL], char mine[ROW][COL],int row,int col, int x, i
 				if (y2 == y)
 				{
 				}
+				else if (mine[x][y2] >= '9')
+				{
+				}
 				else
 				{
 					if (mine[x][y2] > '0')
@@ -93,13 +109,23 @@ void Finmine(char board[ROW][COL], char mine[ROW][COL],int row,int col, int x, i
 						if (board[x][y2] != ' ')
 						{
 							board[x][y2] = mine[x][y2];
-							if (mine[x-1][y2] > '0' && board[x-1][y2] == '*')
+							if (mine[x-1][y2] > '0' && mine[x - 1][y2] < '9' && board[x-1][y2] == '*')
 							{
 								board[x-1][y2] = mine[x-1][y2];
 							}
-							if (mine[x+1][y2] > '0' && board[x+1][y2] == '*')
+							else if (mine[x-1][y2] == '0' && board[x-1][y2] == '*' && mine[x - 1][y2] < '9')
+							{
+								board[x - 1][y2] = ' ';
+								Finmine(board, mine, row, col, x - 1, y2);
+							}
+							if (mine[x+1][y2] > '0' && mine[x + 1][y2] < '9' && board[x+1][y2] == '*')
 							{
 								board[x+1][y2] = mine[x+1][y2];
+							}
+							else if(mine[x + 1][y2] == '0' && board[x + 1][y2] == '*' && mine[x + 1][y2] < '9')
+							{
+								board[x + 1][y2] = ' ';
+								Finmine(board, mine, row, col, x + 1, y2);
 							}
 						}
 					}
@@ -194,8 +220,35 @@ void Play(char board[ROW][COL], char mine[ROW][COL], int row, int col)
 				//ÅĞ¶ÏÊÇ·ñÑ¡ÖĞÀ×
 				if (mine[x][y] < '9')
 				{
-					board[x][y] = ' ';
-					Finmine(board, mine,row,col, x, y);
+					if(mine[x][y]>'0')
+					{
+						board[x][y] = mine[x][y];
+						if (mine[x-1][y] == '0'&& board[x - 1][y] == '*')
+						{
+							board[x - 1][y] = ' ';
+							Finmine(board, mine, row, col, x-1, y);
+						}
+						if (mine[x+1][y] == '0' && board[x + 1][y] == '*')
+						{
+							board[x + 1][y] = ' ';
+							Finmine(board, mine, row, col, x+1, y);
+						}
+						if (mine[x][y-1] == '0' && board[x][y-1] == '*')
+						{
+							board[x][y-1] = ' ';
+							Finmine(board, mine, row, col, x, y-1);
+						}
+						if (mine[x][y+1] == '0' && board[x][y+1] == '*')
+						{
+							board[x][y+1] = ' ';
+							Finmine(board, mine, row, col, x, y+1);
+						}
+					}
+					else
+					{
+						board[x][y] = ' ';
+						Finmine(board, mine, row, col, x, y);
+					}
 					system("cls");
 					Printboard(mine, ROW, COL);
 					printf("\n");

@@ -15,7 +15,7 @@ struct STU
 	int id;
 };//此处可s,s1;是全局变量
 void Print(struct STU x)
-{
+{ 
 	printf("%d %d %s %d %d\n", x.b.a, x.b.b, x.name, x.age, x.id);
 }
 void Print1(struct STU* x)

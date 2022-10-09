@@ -1,13 +1,15 @@
 //1.strcpy
 #include <stdio.h>
 #include <assert.h>
-void Strcpy(char* x,const char* y)//防止复制错误
+char* Strcpy(char* x,const char* y)//防止复制错误
 {
+	char* x1 = x;
 	assert(y != NULL);//断言-为真无事发生-为假发生错误
 	while (*x++ = *y++)
 	{
 		;
 	}
+	return x1;
 }
 void main()
 {
@@ -16,6 +18,7 @@ void main()
 	Strcpy(arr, arr1);
 	printf("%s\n", arr);
 	printf("%s\n", arr1);
+	printf("aa %s\n", Strcpy(arr, arr1));
 	int a = 10;
 	const int* p = &a;
 	//当const放在左边的时候修饰的是*p表示不能通过该指针修改指向内容

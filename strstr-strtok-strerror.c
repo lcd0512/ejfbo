@@ -55,4 +55,5 @@ void main()
 	printf("%s\n", strerror(3));
 	printf("%s\n", strerror(4));
 	printf("%s\n", strerror(5));
+	peroor("fopen");//”Îstrerrorœ‡Õ¨
 }
